@@ -1,0 +1,23 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: poly_liquidity_rewards
+    network: matic
+    source:
+      address: "0xabc4250b8813D40c8C42290384C3C8c8BA33dBE6"
+      abi: poly_liquidity_rewards
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Balance
+      abis:
+        - name: poly_liquidity_rewards
+          file: ./abis/poly_liquidity_rewards.json
+      eventHandlers:
+        - event: RewardPaid(indexed address,uint256)
+          handler: handleRewardPaid
+      file: ./src/mapping.ts
